@@ -22,6 +22,9 @@ struct PianoKeyboardView: View {
 
             // Draw the piano keys
             for note in sortedNotes {
+                let baseColor: Color = note.accidental.isUnaltered ? .white : .black
+                let color = pressedNotes.contains(note) ? baseColor.opacity(0.5) : baseColor
+
                 context.drawLayer { context in
                     context.translateBy(
                         x: (Double(7 * note.octave + note.letter.degree) + Double(note.accidental.semitones) * 0.75) * whiteKeySize.width,
@@ -32,9 +35,16 @@ struct PianoKeyboardView: View {
                             origin: .zero,
                             size: note.accidental.isUnaltered ? whiteKeySize : blackKeySize
                         )),
-                        with: .color(note.accidental.isUnaltered ? .white : .black)
+                        with: .color(color)
                     )
                 }
+            }
+        }
+        .pressable { pressed, point in
+            if pressed {
+                pressedNotes = [notes.first!] // TODO
+            } else {
+                pressedNotes = []
             }
         }
     }
