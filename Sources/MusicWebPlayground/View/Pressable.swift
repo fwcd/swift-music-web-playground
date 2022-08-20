@@ -1,25 +1,30 @@
+import Foundation
 import TokamakDOM
 
 struct Pressable<Content>: View where Content: View {
     @ViewBuilder let content: () -> Content
-    var onPressChanged: (Bool) -> Void = { _ in }
+    var onPressChanged: (Bool, CGPoint) -> Void = { _, _ in }
 
     var body: some View {
         DynamicHTML(
             "div",
             listeners: [
-                "mousedown": { _ in onPressChanged(true) },
-                "mouseup": { _ in onPressChanged(false) },
+                "mousedown": { event in
+                    onPressChanged(true, CGPoint(mouseEvent: event))
+                },
+                "mouseup": { event in
+                    onPressChanged(false, CGPoint(mouseEvent: event))
+                },
                 "mouseenter": { event in
                     if event.buttons == 1 {
                         // Left mouse button held
-                        onPressChanged(true)
+                        onPressChanged(true, CGPoint(mouseEvent: event))
                     }
                 },
                 "mouseout": { event in
                     if event.buttons == 1 {
                         // Left mouse button held
-                        onPressChanged(false)
+                        onPressChanged(false, CGPoint(mouseEvent: event))
                     }
                 },
             ]
@@ -30,7 +35,7 @@ struct Pressable<Content>: View where Content: View {
 }
 
 extension View {
-    func pressable(onPressChanged: @escaping (Bool) -> Void) -> Pressable<Self> {
+    func pressable(onPressChanged: @escaping (Bool, CGPoint) -> Void) -> Pressable<Self> {
         Pressable(content: { self }, onPressChanged: onPressChanged)
     }
 }
