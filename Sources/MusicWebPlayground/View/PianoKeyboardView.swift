@@ -9,6 +9,7 @@ struct PianoKeyboardView: View {
     var blackKeyHeightFactor: Double = 0.7
 
     @State private var pressedNotes: Set<Note> = []
+    @EnvironmentObject private var midiManager: MidiManager
 
     var body: some View {
         GeometryReader { geometry in // We need this reader so we can implement pressable
