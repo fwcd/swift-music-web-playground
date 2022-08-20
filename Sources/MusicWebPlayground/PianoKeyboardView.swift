@@ -13,15 +13,14 @@ struct PianoKeyboardView: View {
     var body: some View {
         HStack {
             ForEach(notes, id: \.semitone) { note in
-                Pressable {
-                    PianoKeyView(note: note, size: noteSize, pressed: pressedNotes.contains(note))
-                } onPressChanged: { pressed in
-                    if pressed {
-                        pressedNotes.insert(note)
-                    } else {
-                        pressedNotes.remove(note)
+                PianoKeyView(note: note, size: noteSize, pressed: pressedNotes.contains(note))
+                    .pressable { pressed in
+                        if pressed {
+                            pressedNotes.insert(note)
+                        } else {
+                            pressedNotes.remove(note)
+                        }
                     }
-                }
             }
         }
     }

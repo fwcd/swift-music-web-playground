@@ -28,3 +28,9 @@ struct Pressable<Content>: View where Content: View {
         }
     }
 }
+
+extension View {
+    func pressable(onPressChanged: @escaping (Bool) -> Void) -> Pressable<Self> {
+        Pressable(content: { self }, onPressChanged: onPressChanged)
+    }
+}
