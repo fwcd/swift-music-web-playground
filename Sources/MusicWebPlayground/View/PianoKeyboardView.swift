@@ -2,6 +2,7 @@ import Foundation
 import MusicTheory
 import TokamakDOM
 
+/// A view that renders an interactive piano keyboard.
 struct PianoKeyboardView: View {
     var notes: [Note] = (0..<3).flatMap { octave in
         NoteClass.twelveToneOctave.map { Note(noteClass: $0, octave: octave) }

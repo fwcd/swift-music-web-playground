@@ -1,6 +1,7 @@
 import Foundation
 import TokamakDOM
 
+/// A wrapper around another view that handles mouse press and drag events.
 struct Pressable<Content>: View where Content: View {
     @ViewBuilder let content: () -> Content
     var onPressChanged: (Bool, CGPoint) -> Void = { _, _ in }
