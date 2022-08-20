@@ -4,7 +4,7 @@ import TokamakDOM
 
 struct PianoKeyboardView: View {
     var notes: [Note] = (0..<3).flatMap { octave in
-        NoteClass.twelveToneOctave.map { Note(noteClass: $0.first!, octave: octave) }
+        NoteClass.twelveToneOctave.map { Note(noteClass: $0, octave: octave) }
     }
     var blackKeyHeightFactor: Double = 0.7
 
