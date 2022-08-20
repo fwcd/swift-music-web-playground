@@ -46,6 +46,14 @@
       }
     },
     {
+      "identity" : "swift-music-theory",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/fwcd/swift-music-theory.git",
+      "state" : {
+        "revision" : "229fe01b60ae8529fa3ee87c76e779c66d611cf4"
+      }
+    },
+    {
       "identity" : "tokamak",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/TokamakUI/Tokamak",
