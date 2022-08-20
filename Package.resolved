@@ -50,7 +50,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/fwcd/swift-music-theory.git",
       "state" : {
-        "revision" : "c79c31fd0caca438bf618f987a002386ca826fcb"
+        "revision" : "83aff8b39e3e4df40b34537a4fc79f7242357d85"
       }
     },
     {

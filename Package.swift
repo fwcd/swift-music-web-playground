@@ -8,7 +8,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/TokamakUI/Tokamak.git", from: "0.10.0"),
-        .package(url: "https://github.com/fwcd/swift-music-theory.git", revision: "c79c31fd0caca438bf618f987a002386ca826fcb"),
+        .package(url: "https://github.com/fwcd/swift-music-theory.git", revision: "83aff8b39e3e4df40b34537a4fc79f7242357d85"),
     ],
     targets: [
         .executableTarget(

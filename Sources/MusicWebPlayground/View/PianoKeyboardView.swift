@@ -25,7 +25,7 @@ struct PianoKeyboardView: View {
             let boundingBox = { (note: Note) -> CGRect in
                 CGRect(
                     origin: CGPoint(
-                        x: (Double(7 * note.octave + note.letter.degree) + Double(note.accidental.semitones) * 0.75) * whiteKeySize.width,
+                        x: (Double(7 * note.octave + note.letter.degree) + 0.5 + Double(note.accidental.semitones) * 0.25) * whiteKeySize.width,
                         y: 0
                     ),
                     size: note.accidental.isUnaltered ? whiteKeySize : blackKeySize
