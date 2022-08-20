@@ -8,18 +8,19 @@ struct PianoKeyboardView: View {
     }
     var noteSize = CGSize(width: 10, height: 50)
 
+    @State private var pressedNotes: Set<Note> = []
+
     var body: some View {
-        DynamicHTML(
-            "div",
-            listeners: [
-                "mousedown": { _ in print("Mouse down") },
-                "mouseup": { _ in print("Mouse up") },
-                "mouseout": { _ in print("Mouse out") },
-            ]
-        ) {
-            HStack {
-                ForEach(notes, id: \.semitone) { note in
-                    PianoKeyView(note: note, size: noteSize)
+        HStack {
+            ForEach(notes, id: \.semitone) { note in
+                Pressable {
+                    PianoKeyView(note: note, size: noteSize, pressed: pressedNotes.contains(note))
+                } onPressChanged: { pressed in
+                    if pressed {
+                        pressedNotes.insert(note)
+                    } else {
+                        pressedNotes.remove(note)
+                    }
                 }
             }
         }
