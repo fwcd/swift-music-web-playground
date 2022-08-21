@@ -2,7 +2,7 @@
 
 [![Deploy](https://github.com/fwcd/swift-music-web-playground/actions/workflows/deploy.yml/badge.svg)](https://github.com/fwcd/swift-music-web-playground/actions/workflows/deploy.yml)
 
-A small demo of [`swift-music-theory`](https://github.com/fwcd/swift-music-theory) in a [SwiftWasm](https://github.com/swiftwasm) + [Tokamak](https://github.com/TokamakUI/Tokamak) web app.
+A small demo of [`swift-music-theory`](https://github.com/fwcd/swift-music-theory) in a [SwiftWasm](https://github.com/swiftwasm) + [Tokamak](https://github.com/TokamakUI/Tokamak) web app. [Try it out on the web here!](https://fwcd.github.io/swift-music-web-playground)
 
 ![Screenshot](Images/screenshot.png)
 
