@@ -5,6 +5,7 @@ import MusicTheory
 /// Handles interaction with the Web Audio API.
 class AudioManager: ObservableObject {
     @Published private(set) var audioAvailable: Bool = false
+    @Published private(set) var oscillatorType: OscillatorType = .sine
 
     private var audioContext: JSObject!
     private var oscillatorNodes: [Note: JSObject] = [:]
@@ -50,7 +51,7 @@ class AudioManager: ObservableObject {
         // Set up an oscillator node and start it
         let osc = audioContext.createOscillator!().object!
         _ = osc.connect!(audioContext.destination)
-        osc.type = "triangle" // TODO: Other options
+        osc.type = .string(oscillatorType.rawValue)
         osc.frequency.object!.value = .number(EqualTemperament().pitchHz(for: note))
         _ = osc.start!()
 
