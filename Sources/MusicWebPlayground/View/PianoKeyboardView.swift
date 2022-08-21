@@ -4,7 +4,7 @@ import TokamakDOM
 
 /// A view that renders an interactive piano keyboard.
 struct PianoKeyboardView: View {
-    var notes: [Note] = (0..<3).flatMap { octave in
+    var notes: [Note] = (1..<4).flatMap { octave in
         NoteClass.twelveToneOctave.map { Note(noteClass: $0, octave: octave) }
     }
     var blackKeyHeightFactor: Double = 0.7
@@ -26,7 +26,7 @@ struct PianoKeyboardView: View {
             let boundingBox = { (note: Note) -> CGRect in
                 CGRect(
                     origin: CGPoint(
-                        x: (Double(7 * note.octave + note.letter.degree) + 0.5 + Double(note.accidental.semitones) * 0.25) * whiteKeySize.width,
+                        x: (Double(note.letterDegree - notes[0].letterDegree) + 0.5 + Double(note.accidental.semitones) * 0.25) * whiteKeySize.width,
                         y: 0
                     ),
                     size: note.accidental.isUnaltered ? whiteKeySize : blackKeySize
