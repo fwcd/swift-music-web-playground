@@ -24,9 +24,11 @@ struct SideView: View {
                 }
             }
 
-            EnumPicker(selection: $audioManager.oscillatorType) {
-                Text("Oscillator Type: ")
-            }
+            // TODO: Picker is broken currently, therefore we'll disable it until
+            // https://github.com/TokamakUI/Tokamak/issues/285 is fixed
+            // EnumPicker(selection: $audioManager.oscillatorType) {
+            //     Text("Oscillator Type: ")
+            // }
         }
     }
 }
