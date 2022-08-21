@@ -8,7 +8,12 @@ class AudioManager: ObservableObject {
     @Published var oscillatorType: OscillatorType = .sine
 
     private var audioContext: JSObject!
-    private var oscillatorNodes: [Note: JSObject] = [:]
+    private var gainNode: JSObject!
+    private var oscillatorNodes: [Note: JSObject] = [:] {
+        didSet {
+            gainNode.gain.object!.value = .number(1 / max(1, Double(oscillatorNodes.count)))
+        }
+    }
 
     init() {
         do {
@@ -22,7 +27,10 @@ class AudioManager: ObservableObject {
         let AudioContext = JSObject.global.AudioContext.function!
         audioContext = AudioContext.new()
         
-        // TODO: Gain node?
+        // Create a gain node (without it, the oscillators would start clipping when played simultaneously)
+        gainNode = audioContext.createGain!().object!
+        gainNode.gain.object!.value = 1
+        _ = gainNode.connect!(audioContext.destination)
 
         audioAvailable = true
     }
@@ -50,7 +58,7 @@ class AudioManager: ObservableObject {
 
         // Set up an oscillator node and start it
         let osc = audioContext.createOscillator!().object!
-        _ = osc.connect!(audioContext.destination)
+        _ = osc.connect!(gainNode)
         osc.type = .string(oscillatorType.rawValue)
         osc.frequency.object!.value = .number(EqualTemperament().pitchHz(for: note))
         _ = osc.start!()
