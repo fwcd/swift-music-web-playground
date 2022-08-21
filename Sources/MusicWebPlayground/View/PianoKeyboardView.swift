@@ -4,10 +4,14 @@ import TokamakDOM
 
 /// A view that renders an interactive piano keyboard.
 struct PianoKeyboardView: View {
-    var notes: [Note] = (1..<4).flatMap { octave in
-        NoteClass.twelveToneOctave.map { Note(noteClass: $0, octave: octave) }
-    }
+    var octaveRange = 1..<4
     var blackKeyHeightFactor: Double = 0.7
+
+    private var notes: [Note] {
+        octaveRange.flatMap { octave in
+            NoteClass.twelveToneOctave.map { Note(noteClass: $0, octave: octave) }
+        }
+    }
 
     @EnvironmentObject private var viewModel: PianoKeyboardViewModel
 
