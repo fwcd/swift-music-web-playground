@@ -44,7 +44,7 @@ class MidiManager: ObservableObject {
                 case .noteOn:
                     activeMidiNotes.insert(Int(midiMsg.data1))
                 case .noteOff:
-                    activeMidiNotes.insert(Int(midiMsg.data1))
+                    activeMidiNotes.remove(Int(midiMsg.data1))
                 default:
                     break
                 }

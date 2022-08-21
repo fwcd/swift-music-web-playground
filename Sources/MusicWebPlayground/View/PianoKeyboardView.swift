@@ -9,8 +9,7 @@ struct PianoKeyboardView: View {
     }
     var blackKeyHeightFactor: Double = 0.7
 
-    @State private var pressedNotes: Set<Note> = []
-    @EnvironmentObject private var midiManager: MidiManager
+    @EnvironmentObject private var viewModel: PianoKeyboardViewModel
 
     var body: some View {
         GeometryReader { geometry in // We need this reader so we can implement pressable
@@ -38,7 +37,7 @@ struct PianoKeyboardView: View {
                 // Draw the piano keys
                 for note in sortedNotes {
                     let baseColor: Color = note.accidental.isUnaltered ? .white : .black
-                    let color = pressedNotes.contains(note) ? baseColor.opacity(0.5) : baseColor
+                    let color = viewModel.activeNotes.contains(note) ? baseColor.opacity(0.5) : baseColor
 
                     context.drawLayer { context in
                         context.fill(
@@ -50,9 +49,9 @@ struct PianoKeyboardView: View {
             }
             .pressable { pressed, point in
                 if pressed {
-                    pressedNotes = sortedNotes.last { boundingBox($0).contains(point) }.map { [$0] } ?? []
+                    viewModel.activeNotes = sortedNotes.last { boundingBox($0).contains(point) }.map { [$0] } ?? []
                 } else {
-                    pressedNotes = []
+                    viewModel.activeNotes = []
                 }
             }
         }

@@ -1,13 +1,15 @@
 import TokamakDOM
 
+private let midiManager = MidiManager()
+private let pianoKeyboardViewModel = PianoKeyboardViewModel(midiManager: midiManager)
+
 @main
 struct MusicWebPlaygroundApp: App {
-    @StateObject private var midiManager = MidiManager()
-
     var body: some Scene {
         WindowGroup("Music Web Playground") {
             ContentView()
                 .environmentObject(midiManager)
+                .environmentObject(pianoKeyboardViewModel)
         }
     }
 }
