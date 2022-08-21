@@ -39,7 +39,7 @@ class MidiManager: ObservableObject {
                     data1: UInt8(buffer[1].number!),
                     data2: UInt8(buffer[2].number!)
                 )
-                print("Got \(midiMsg)")
+                print("Got \(midiMsg) (kind: \(midiMsg.statusKind.map { "\($0)".split(separator: ".").last! } ?? "?"))")
                 return .undefined
             })
             return .undefined
