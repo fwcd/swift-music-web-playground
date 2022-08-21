@@ -23,6 +23,10 @@ struct SideView: View {
                     pianoKeyboard.shiftOctaveRange(by: 1)
                 }
             }
+
+            EnumPicker(selection: $audioManager.oscillatorType) {
+                Text("Oscillator Type: ")
+            }
         }
     }
 }

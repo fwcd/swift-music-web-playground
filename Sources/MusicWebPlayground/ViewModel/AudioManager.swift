@@ -5,7 +5,7 @@ import MusicTheory
 /// Handles interaction with the Web Audio API.
 class AudioManager: ObservableObject {
     @Published private(set) var audioAvailable: Bool = false
-    @Published private(set) var oscillatorType: OscillatorType = .sine
+    @Published var oscillatorType: OscillatorType = .sine
 
     private var audioContext: JSObject!
     private var oscillatorNodes: [Note: JSObject] = [:]
