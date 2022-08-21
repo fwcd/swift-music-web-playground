@@ -4,16 +4,15 @@ import TokamakDOM
 
 /// A view that renders an interactive piano keyboard.
 struct PianoKeyboardView: View {
-    var octaveRange = 1..<4
     var blackKeyHeightFactor: Double = 0.7
 
+    @EnvironmentObject private var viewModel: PianoKeyboardViewModel
+
     private var notes: [Note] {
-        octaveRange.flatMap { octave in
+        viewModel.octaveRange.flatMap { octave in
             NoteClass.twelveToneOctave.map { Note(noteClass: $0, octave: octave) }
         }
     }
-
-    @EnvironmentObject private var viewModel: PianoKeyboardViewModel
 
     var body: some View {
         GeometryReader { geometry in // We need this reader so we can implement pressable

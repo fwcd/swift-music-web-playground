@@ -2,6 +2,7 @@ import OpenCombine
 import MusicTheory
 
 class PianoKeyboardViewModel: ObservableObject {
+    @Published var octaveRange = 1..<4
     @Published var activeNotes: Set<Note> = []
 
     private var cancellables: Set<AnyCancellable> = []
