@@ -8,8 +8,9 @@ struct ContentView: View {
         HStack(spacing: 20) {
             PianoKeyboardView()
                 .frame(width: 1000, height: 200) // TODO: Dynamic height?
-            VStack {
+            VStack(alignment: .leading) {
                 StatusIndicatorView(active: midiManager.midiAvailable, label: "MIDI available")
+                StatusIndicatorView(label: "\(midiManager.midiInputCount) MIDI input(s)")
             }
         }
     }
