@@ -10,7 +10,7 @@ Notes can either be played by clicking with the mouse or via a connected MIDI ke
 
 ## Getting Started
 
-Make sure to have [Canton](https://github.com/swiftwasm/carton) installed. To start the development server that continuously rebuilds the app, run
+Make sure to have [Carton](https://github.com/swiftwasm/carton) installed. To start the development server that continuously rebuilds the app, run
 
 ```sh
 carton dev
