@@ -5,6 +5,7 @@ import JavaScriptKit
 class MidiManager: ObservableObject {
     @Published private(set) var midiAvailable: Bool = false
     @Published private(set) var midiInputCount: Int = 0
+    @Published private(set) var activeMidiNotes: Set<Int> = []
 
     init() {
         Task {
@@ -31,7 +32,14 @@ class MidiManager: ObservableObject {
         // TODO: Continuously monitor for inputs? Is that needed?
         _ = midiAccess.inputs.forEach(JSClosure { entry in
             _ = entry[0].addEventListener("midimessage", JSClosure { msg in
-                print("Got MIDI message")
+                // TODO: Move parsing to a dedicated library
+                let buffer = msg[0].data.object!
+                let midiMsg = MidiMessage(
+                    status: UInt8(buffer[0].number!),
+                    data1: UInt8(buffer[1].number!),
+                    data2: UInt8(buffer[2].number!)
+                )
+                print("Got \(midiMsg)")
                 return .undefined
             })
             return .undefined
