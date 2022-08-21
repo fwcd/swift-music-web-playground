@@ -14,4 +14,8 @@ class PianoKeyboardViewModel: ObservableObject {
             }
             .store(in: &cancellables)
     }
+
+    func shiftOctaveRange(by octaves: Int) {
+        octaveRange = (octaveRange.lowerBound + octaves)..<(octaveRange.upperBound + octaves)
+    }
 }
