@@ -7,6 +7,7 @@ struct ContentView: View {
             PianoKeyboardView()
                 .frame(width: 1000, height: 200) // TODO: Dynamic height?
             SideView()
+                .nonSelectable()
         }
     }
 }
