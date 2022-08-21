@@ -7,10 +7,16 @@ class PianoKeyboardViewModel: ObservableObject {
 
     private var cancellables: Set<AnyCancellable> = []
 
-    init(midiManager: MidiManager) {
+    init(audioManager: AudioManager, midiManager: MidiManager) {
         midiManager.$activeMidiNotes
             .sink { [weak self] midiNumbers in
                 self?.activeNotes = Set(midiNumbers.map { Note(midiNumber: $0) })
+            }
+            .store(in: &cancellables)
+        
+        $activeNotes
+            .sink { notes in
+                audioManager.keepPlaying(notes: notes)
             }
             .store(in: &cancellables)
     }
