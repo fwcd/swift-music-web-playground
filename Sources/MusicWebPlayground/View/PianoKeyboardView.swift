@@ -40,10 +40,20 @@ struct PianoKeyboardView: View {
                     let color = viewModel.activeNotes.contains(note) ? baseColor.opacity(0.5) : baseColor
 
                     context.drawLayer { context in
+                        let bb = boundingBox(note)
                         context.fill(
-                            Rectangle().path(in: boundingBox(note)),
+                            Rectangle().path(in: bb),
                             with: .color(color)
                         )
+                        if note.noteClass == .c {
+                            context.draw(
+                                Text(note.description)
+                                    .font(.system(size: 14))
+                                    .foregroundColor(.init(white: 0.85)),
+                                at: CGPoint(x: bb.midX, y: bb.maxY),
+                                anchor: .bottom
+                            )
+                        }
                     }
                 }
             }
